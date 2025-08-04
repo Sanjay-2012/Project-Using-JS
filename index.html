@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meal Finder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <h1>🍽️ MEAL FINDER</h1>
+      <button id="toggleMenu">☰</button>
+    </div>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search recipes here..." />
+      <button id="searchBtn">🔍</button>
+    </div>
+  </header>
+
+  <aside id="categoryMenu" class="hidden">
+    <button id="closeMenu">❌</button>
+    <ul id="categoryList"></ul>
+  </aside>
+
+  <main>
+    <section class="category-section">
+      <h2>Categories</h2>
+      <div id="categoriesContainer" class="grid"></div>
+    </section>
+
+    <section id="mealsSection">
+      <!-- This section will be filled with JS -->
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
