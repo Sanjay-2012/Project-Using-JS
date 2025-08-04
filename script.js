@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
   mealsGrid.appendChild(mealCard);
 });
 
-      });
+     });
   }
 
   // Optional: Search (you can improve this)
@@ -123,5 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+
 
 
