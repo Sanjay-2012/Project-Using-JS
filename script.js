@@ -1,10 +1,11 @@
+  const main = document.querySelector("main");
+
 document.addEventListener("DOMContentLoaded", () => {
   const categoriesContainer = document.getElementById("categoriesContainer");
   const categoryMenu = document.getElementById("categoryMenu");
   const categoryList = document.getElementById("categoryList");
   const toggleMenu = document.getElementById("toggleMenu");
   const closeMenu = document.getElementById("closeMenu");
-  const main = document.querySelector("main");
   const searchBtn = document.getElementById("searchBtn");
   const searchInput = document.getElementById("searchInput");
 
@@ -123,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+
 
 
 
