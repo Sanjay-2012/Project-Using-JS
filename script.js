@@ -1,4 +1,4 @@
-  const main = document.querySelector("main");
+const main = document.querySelector("main");
 
 document.addEventListener("DOMContentLoaded", () => {
   const categoriesContainer = document.getElementById("categoriesContainer");
@@ -124,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+
 
 
 
