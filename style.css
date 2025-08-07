@@ -243,9 +243,7 @@ header {
 .meal-card {
   background: white;
   border-radius: 8px;
-  overflow: hidden;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  overflow: hidden
 }
 
 .meal-card img {
@@ -256,8 +254,8 @@ header {
 
 .meal-card p {
   padding: 10px;
-  font-weight: bold;
 }
+
 
 
 
