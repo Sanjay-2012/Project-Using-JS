@@ -151,3 +151,51 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Show meal details
+function showMealDetails(mealId) {
+  main.innerHTML = "";
+
+  fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
+    .then(res => res.json())
+    .then(data => {
+      const meal = data.meals[0];
+
+      const mealDetail = document.createElement("div");
+      mealDetail.className = "meal-detail";
+      mealDetail.innerHTML = `
+        <div class="meal-title">${meal.strMeal}</div>
+
+        <div class="image-ingredients">
+          <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
+          <div class="ingredients">
+            <h3>Ingredients</h3>
+            <ul id="ingredientList"></ul>
+          </div>
+        </div>
+
+        <div class="category-area">
+          <p><strong>Category:</strong> ${meal.strCategory}</p>
+          <p><strong>Area:</strong> ${meal.strArea}</p>
+        </div>
+
+        <div class="instructions">
+          <h3>Instructions</h3>
+          <p>${meal.strInstructions}</p>
+        </div>
+      `;
+
+      main.appendChild(mealDetail);
+
+      const ingredientList = mealDetail.querySelector("#ingredientList");
+      for (let i = 1; i <= 20; i++) {
+        const ingredient = meal[`strIngredient${i}`];
+        const measure = meal[`strMeasure${i}`];
+        if (ingredient && ingredient.trim() !== "") {
+          const li = document.createElement("li");
+          li.textContent = `${ingredient} - ${measure}`;
+          ingredientList.appendChild(li);
+        }
+      }
+    });
+}
+
