@@ -45,4 +45,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+  // Show category details and meals
+  function showCategoryDetails(category) {
+    categoryMenu.classList.add("hidden"); // Close sidebar on click
+    main.innerHTML = "";
+
+    // Add category title and description
+    const header = document.createElement("div");
+    header.className = "category-header";
+    header.innerHTML = `
+      <h2>${category.strCategory}</h2>
+      <p>${category.strCategoryDescription}</p>
+    `;
+    main.appendChild(header);
+
+    // Add "Meals" title
+    const mealsTitle = document.createElement("h3");
+    mealsTitle.className = "meals-title";
+    mealsTitle.textContent = "Meals";
+    main.appendChild(mealsTitle);
+
+    // Create meals grid
+    const mealsGrid = document.createElement("div");
+    mealsGrid.className = "meals-grid";
+    main.appendChild(mealsGrid);
+
+    // Fetch and display meals
+    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category.strCategory}`)
+      .then(res => res.json())
+      .then(data => {
+        data.meals.forEach(meal => {
+          const mealCard = document.createElement("div");
+          mealCard.className = "meal-card";
+          mealCard.innerHTML = `
+            <img src="${meal.strMealThumb}" />
+            <p>${meal.strMeal}</p>
+          `;
+          mealCard.addEventListener("click", () => showMealDetails(meal.idMeal));
+          mealsGrid.appendChild(mealCard);
+        });
+      });
+  }
+
 
