@@ -87,4 +87,67 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
+  // SEARCH MEALS with dynamic description from API
+  searchBtn.addEventListener("click", () => {
+    const query = searchInput.value.trim();
+    if (!query) return;
+
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`)
+      .then(res => res.json())
+      .then(data => {
+        main.innerHTML = "";
+
+        if (!data.meals) {
+          main.innerHTML = "<p style='text-align:center;'>No meals found.</p>";
+          return;
+        }
+
+        // Fetch category descriptions to match with search query
+        fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
+          .then(res => res.json())
+          .then(catData => {
+            const matchedCategory = catData.categories.find(cat =>
+              cat.strCategory.toLowerCase() === query.toLowerCase()
+            );
+
+            if (matchedCategory) {
+              const div = document.createElement("div")
+              div.className = "title"
+
+              const title = document.createElement("h3");
+              title.className = "meals-title";
+              title.textContent = matchedCategory.strCategory;
+              div.appendChild(title);
+
+              const desc = document.createElement("p");
+              desc.className = "meals-description";
+              desc.textContent = matchedCategory.strCategoryDescription;
+              div.appendChild(desc);
+             main.appendChild(div)
+
+            } else {
+              const fallbackTitle = document.createElement("h3");
+              fallbackTitle.className = "meals-title";
+              fallbackTitle.textContent = `Search Results for "${query}"`;
+              main.appendChild(fallbackTitle);
+            }
+
+            const mealsGrid = document.createElement("div");
+            mealsGrid.className = "meals-grid";
+            main.appendChild(mealsGrid);
+
+            data.meals.forEach(meal => {
+              const mealCard = document.createElement("div");
+              mealCard.className = "meal-card";
+              mealCard.innerHTML = `
+                <img src="${meal.strMealThumb}" />
+                <p>${meal.strMeal}</p>
+              `;
+              mealCard.addEventListener("click", () => showMealDetails(meal.idMeal));
+              mealsGrid.appendChild(mealCard);
+            });
+          });
+      });
+  });
+});
 
